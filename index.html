@@ -437,7 +437,7 @@ body.light .tl-tag.check { background: rgba(22,163,74,0.08); color: var(--l-gree
 
 /* ── Right Panel ── */
 .sidebar {
-  width: 284px; flex-shrink: 0;
+  width: 300px; flex-shrink: 0;
   background: var(--surface); border-left: 1px solid var(--hairline);
   padding: 48px 24px; display: flex; flex-direction: column; gap: 24px;
   overflow-y: auto; transition: background 0.3s, border-color 0.3s;
@@ -476,27 +476,24 @@ body.light .sidebar { background: var(--l-surface); border-color: var(--l-hairli
   padding: 14px 16px; border: 1px solid var(--hairline);
 }
 .countdown-digits {
-  display: flex; gap: 2px; align-items: baseline;
+  display: flex; gap: 1px; align-items: baseline;
   font-family: "JetBrains Mono", var(--mono);
-  font-size: 18px; font-weight: 400;
+  font-size: 17px; font-weight: 400;
   color: var(--accent);
   font-variant-numeric: tabular-nums;
   letter-spacing: 0;
 }
 .countdown-digits .num {
   background: var(--hairline2); border: 1px solid var(--hairline);
-  border-radius: 4px; padding: 1px 3px; min-width: 24px;
+  border-radius: 4px; padding: 1px 2px; min-width: 22px;
   text-align: center; display: inline-block;
   transition: all 0.15s;
 }
-.countdown-digits .num.flash {
-  animation: popIn 0.2s ease;
-}
 .countdown-digits .sep {
-  font-size: 13px; color: var(--muted); margin: 0 1px;
+  font-size: 11px; color: var(--muted); margin: 0;
 }
 .countdown-digits .unit {
-  font-size: 9px; color: var(--muted); margin-left: 2px;
+  font-size: 8px; color: var(--muted); margin-left: 1px;
   font-family: var(--sans); font-weight: 400;
   text-transform: uppercase;
 }
