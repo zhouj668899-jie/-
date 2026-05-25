@@ -11,6 +11,8 @@
   --serif-cn: "Noto Serif SC", "Source Han Serif SC", serif;
   --sans: "Inter", -apple-system, "PingFang SC", system-ui, sans-serif;
   --mono: "JetBrains Mono", "SF Mono", ui-monospace, monospace;
+
+  /* Dark */
   --bg: #0A0A0A;
   --surface: #111111;
   --ink: #EFEFEF;
@@ -59,6 +61,7 @@ html, body {
   font-family: var(--sans);
   color: var(--ink);
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
   width: 100%;
 }
@@ -67,7 +70,7 @@ html, body {
 /* ── Particle Canvas ── */
 #particleCanvas {
   position: fixed; inset: 0; z-index: 0;
-  pointer-events: none; opacity: 0.35;
+  pointer-events: none; opacity: 0.18;
 }
 
 .stage {
@@ -145,12 +148,12 @@ body.light .display-sub { color: var(--l-ink-60); }
   to { opacity: 1; transform: translateY(0); }
 }
 @keyframes fadeSlideUp {
-  from { opacity: 0; transform: translateY(24px); }
+  from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
 .reveal {
-  opacity: 0; transform: translateY(28px);
+  opacity: 0; transform: translateY(24px);
   transition: opacity 0.6s ease, transform 0.6s ease;
 }
 .reveal.visible { opacity: 1; transform: translateY(0); }
@@ -172,7 +175,6 @@ body.light .stats-row { border-top-color: var(--l-hairline); }
   border-right: 1px solid var(--hairline);
   cursor: pointer;
   transition: background 0.2s;
-  border-radius: 4px;
 }
 .stat-cell:first-child { padding-left: 0; }
 .stat-cell:last-child { border-right: none; padding-left: 24px; padding-right: 0; }
@@ -197,12 +199,6 @@ body.light .stat-label { color: var(--l-muted); }
   letter-spacing: -0.03em;
   color: var(--ink);
   font-variant-numeric: oldstyle-nums proportional-nums;
-  transition: color 0.3s;
-}
-.stat-value.counted { animation: pulseCount 0.5s ease; }
-@keyframes pulseCount {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.06); }
 }
 body.light .stat-value { color: var(--l-ink); }
 .stat-value.accent { color: var(--accent); }
@@ -230,7 +226,7 @@ body.light .stat-sub { color: var(--l-ink-60); }
 }
 .progress-header {
   display: flex; justify-content: space-between; align-items: baseline;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 .progress-label {
   font-family: var(--mono);
@@ -239,22 +235,23 @@ body.light .stat-sub { color: var(--l-ink-60); }
   color: var(--muted);
   text-transform: uppercase;
 }
+body.light .progress-label { color: var(--l-muted); }
 .progress-pct {
   font-family: var(--mono);
-  font-size: 12px;
-  font-weight: 600;
+  font-size: 11px;
+  font-weight: 500;
   color: var(--accent);
-  transition: color 0.3s;
 }
+body.light .progress-pct { color: var(--l-accent); }
 .progress-track {
-  height: 4px; background: var(--hairline2);
-  border-radius: 2px; overflow: hidden;
+  height: 2px; background: var(--hairline);
+  border-radius: 1px; overflow: hidden;
 }
 .progress-fill {
   height: 100%; width: 0%;
-  background: linear-gradient(90deg, var(--accent), var(--green));
-  border-radius: 2px;
-  transition: width 1.2s cubic-bezier(0.22, 0.61, 0.36, 1);
+  background: var(--accent);
+  border-radius: 1px;
+  transition: width 1s cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
 /* ── Section title ── */
@@ -266,20 +263,21 @@ body.light .stat-sub { color: var(--l-ink-60); }
   text-transform: uppercase;
   margin-bottom: 16px;
   display: flex; align-items: center;
-  gap: 10px;
+  gap: 8px;
   cursor: pointer;
   user-select: none;
   transition: color 0.2s;
 }
-.section-title:hover { color: var(--ink-60); }
 body.light .section-title { color: var(--l-muted); }
+.section-title:hover { color: var(--ink-60); }
 body.light .section-title:hover { color: var(--l-ink-60); }
 .section-caret {
-  font-size: 8px; transition: transform 0.3s;
+  font-size: 7px;
   display: inline-block;
+  transition: transform 0.25s;
 }
 .section-caret.open { transform: rotate(90deg); }
-.section-body { overflow: hidden; transition: max-height 0.4s ease, opacity 0.3s; }
+.section-body { overflow: hidden; transition: max-height 0.4s ease, opacity 0.3s, margin 0.4s; }
 .section-body.collapsed { max-height: 0 !important; opacity: 0; margin-bottom: 0 !important; }
 
 /* ── Overview Table ── */
@@ -322,14 +320,11 @@ body.light .ov-table td { color: var(--l-ink-60); border-bottom-color: var(--l-h
 body.light .ov-table td:first-child { color: var(--l-ink-80); }
 .ov-table tr:last-child td { border-bottom: none; }
 .ov-table tbody tr {
-  transition: background 0.2s, transform 0.2s;
+  transition: background 0.2s;
   cursor: pointer;
 }
 .ov-table tbody tr:hover { background: var(--hairline2); }
-.ov-table tbody tr.highlight-row {
-  background: var(--accent-bg);
-  transform: scale(1.005);
-}
+.ov-table tbody tr.highlight-row { background: var(--accent-bg); }
 
 .ov-table .may { color: var(--accent); font-weight: 600; }
 body.light .ov-table .may { color: var(--l-accent); }
@@ -341,6 +336,29 @@ body.light .ov-table .jun { color: var(--l-blue); }
   background: var(--hairline2);
 }
 body.light .ov-table .subtotal { color: var(--l-ink); background: var(--l-hairline2); }
+
+/* ── Filter chips ── */
+.filter-row {
+  display: flex; gap: 6px; flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+.filter-chip {
+  font-family: var(--mono);
+  font-size: 9px; padding: 3px 10px;
+  border-radius: 10px;
+  border: 1px solid var(--hairline);
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+body.light .filter-chip { border-color: var(--l-hairline); color: var(--l-muted); }
+.filter-chip:hover { border-color: var(--ink-60); color: var(--ink-60); }
+.filter-chip.active {
+  background: var(--accent); border-color: var(--accent);
+  color: #000; font-weight: 600;
+}
+body.light .filter-chip.active { background: var(--l-accent); border-color: var(--l-accent); color: #fff; }
 
 /* ── Engineer Cards ── */
 .eng-grid {
@@ -356,21 +374,16 @@ body.light .ov-table .subtotal { color: var(--l-ink); background: var(--l-hairli
   padding: 20px 22px;
   transition: all 0.3s cubic-bezier(0.22, 0.61, 0.36, 1);
   cursor: pointer;
-  position: relative;
 }
 .eng-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.2);
   border-color: var(--accent);
 }
 body.light .eng-card { background: var(--l-surface); border-color: var(--l-hairline); }
 body.light .eng-card:hover {
-  box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.06);
   border-color: var(--l-accent);
-}
-.eng-card.expanded {
-  grid-column: 1 / -1;
-  z-index: 2;
 }
 
 .eng-header {
@@ -394,7 +407,7 @@ body.light .eng-header { border-bottom-color: var(--l-hairline); }
   flex-shrink: 0;
   transition: transform 0.3s;
 }
-.eng-card:hover .eng-avatar { transform: scale(1.1); }
+.eng-card:hover .eng-avatar { transform: scale(1.08); }
 .eng-card:first-child .eng-avatar { background: var(--accent); }
 .eng-card:last-child .eng-avatar { background: var(--blue); }
 body.light .eng-card:first-child .eng-avatar { background: var(--l-accent); color: #fff; }
@@ -415,11 +428,6 @@ body.light .eng-name { color: var(--l-ink); }
   background: var(--hairline2);
   padding: 3px 8px;
   border-radius: 10px;
-  transition: all 0.3s;
-}
-.eng-card:hover .eng-badge {
-  color: var(--accent);
-  background: var(--accent-bg);
 }
 body.light .eng-badge { color: var(--l-muted); background: var(--l-hairline2); }
 
@@ -433,9 +441,7 @@ body.light .eng-badge { color: var(--l-muted); background: var(--l-hairline2); }
   justify-content: space-between;
   align-items: center;
   padding: 3px 0;
-  transition: transform 0.2s;
 }
-.eng-spec-row:hover { transform: translateX(-4px); }
 .eng-spec-code {
   font-family: var(--mono);
   font-size: 11px;
@@ -448,21 +454,8 @@ body.light .eng-spec-code { color: var(--l-muted); }
   font-size: 13px;
   font-weight: 500;
   color: var(--accent);
-  transition: transform 0.2s;
 }
-.eng-spec-row:hover .eng-spec-qty { transform: scale(1.1); }
 body.light .eng-spec-qty { color: var(--l-accent); }
-
-.eng-total-bar {
-  margin-top: 10px; height: 3px; background: var(--hairline2);
-  border-radius: 2px; overflow: hidden;
-}
-.eng-total-fill {
-  height: 100%; border-radius: 2px; width: 0%;
-  background: var(--accent);
-  transition: width 1s cubic-bezier(0.22, 0.61, 0.36, 1);
-}
-.eng-card:last-child .eng-total-fill { background: var(--blue); }
 
 /* ── Timeline ── */
 .timeline {
@@ -502,22 +495,14 @@ body.light .tl-date { color: var(--l-muted); }
   flex-shrink: 0;
   cursor: pointer;
   transition: all 0.3s;
-  position: relative;
 }
-.tl-dot:hover { transform: scale(1.6); box-shadow: 0 0 12px var(--accent); }
+.tl-dot:hover { transform: scale(1.5); box-shadow: 0 0 8px var(--accent); }
 .tl-dot.done {
   background: var(--green);
-  transform: scale(1.4);
+  transform: scale(1.35);
 }
 body.light .tl-dot { background: var(--l-accent); }
 body.light .tl-dot.done { background: var(--l-green); }
-.tl-dot.done::after {
-  content: '✓';
-  position: absolute;
-  top: -4px; left: 2px;
-  font-size: 8px; color: #000;
-  font-weight: 700;
-}
 .tl-line {
   width: 1px;
   flex: 1;
@@ -529,11 +514,7 @@ body.light .tl-dot.done { background: var(--l-green); }
 .tl-line.done { background: var(--green); }
 body.light .tl-line { background: var(--l-hairline); }
 body.light .tl-line.done { background: var(--l-green); }
-.tl-content {
-  padding-bottom: 12px;
-  transition: opacity 0.3s;
-}
-.tl-content.dimmed { opacity: 0.5; }
+.tl-content { padding-bottom: 12px; }
 .tl-day {
   font-family: var(--mono);
   font-size: 9px;
@@ -543,27 +524,29 @@ body.light .tl-line.done { background: var(--l-green); }
   margin-bottom: 3px;
   transition: color 0.3s;
 }
-.tl-row.completed .tl-day { color: var(--green); }
 body.light .tl-day { color: var(--l-accent); }
+.tl-row.completed .tl-day { color: var(--green); }
+body.light .tl-row.completed .tl-day { color: var(--l-green); }
 .tl-title {
   font-family: var(--serif-cn);
   font-size: 14px;
   font-weight: 600;
   color: var(--ink);
   margin-bottom: 2px;
-  display: flex; align-items: center; gap: 8px;
+  display: flex; align-items: center; gap: 6px;
 }
 body.light .tl-title { color: var(--l-ink); }
 .tl-check {
-  width: 16px; height: 16px;
-  border-radius: 3px;
+  width: 15px; height: 15px;
+  border-radius: 50%;
   border: 1.5px solid var(--hairline);
   flex-shrink: 0;
   cursor: pointer;
   display: flex; align-items: center; justify-content: center;
   transition: all 0.25s;
-  font-size: 10px; color: transparent;
+  font-size: 9px; color: transparent;
 }
+body.light .tl-check { border-color: var(--l-hairline); }
 .tl-check:hover { border-color: var(--accent); }
 .tl-check.checked {
   background: var(--green); border-color: var(--green); color: #000;
@@ -588,10 +571,7 @@ body.light .tl-desc { color: var(--l-ink-60); }
   letter-spacing: 0.1em;
   padding: 2px 8px;
   border-radius: 10px;
-  transition: all 0.2s;
-  cursor: default;
 }
-.tl-tag:hover { filter: brightness(1.2); }
 .tl-tag.niu { background: rgba(217,119,87,0.12); color: var(--accent); }
 .tl-tag.wang { background: rgba(90,158,255,0.12); color: var(--blue); }
 .tl-tag.sign { background: rgba(255,230,109,0.10); color: #FFE66D; }
@@ -673,18 +653,21 @@ body.light .status-text { color: var(--l-accent); }
   padding: 12px 14px;
   border: 1px solid var(--hairline);
 }
+body.light .countdown-box { background: var(--l-hairline2); border-color: var(--l-hairline); }
 .countdown-digits {
-  display: flex; gap: 6px; align-items: baseline;
+  display: flex; gap: 4px; align-items: baseline;
   font-family: var(--serif-en);
-  font-size: 28px; font-weight: 300;
+  font-size: 26px; font-weight: 300;
   color: var(--accent);
   letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
 }
+body.light .countdown-digits { color: var(--l-accent); }
 .countdown-digits .sep {
-  font-size: 16px; color: var(--muted); margin: 0 2px;
+  font-size: 14px; color: var(--muted); margin: 0 1px;
 }
 .countdown-digits .unit {
-  font-size: 11px; color: var(--muted); margin-left: 3px;
+  font-size: 10px; color: var(--muted); margin-left: 2px;
   font-family: var(--sans); font-weight: 400;
 }
 .countdown-sub {
@@ -692,6 +675,7 @@ body.light .status-text { color: var(--l-accent); }
   font-family: var(--sans);
   font-size: 10px; color: var(--muted);
 }
+body.light .countdown-sub { color: var(--l-muted); }
 
 .divider { height: 1px; background: var(--hairline); transition: background 0.3s; }
 body.light .divider { background: var(--l-hairline); }
@@ -717,28 +701,30 @@ body.light .toggle-lbl { color: var(--l-ink-80); }
 }
 body.light .toggle-lbl-sub { color: var(--l-muted); }
 .toggle {
-  position: relative; width: 38px; height: 20px;
+  position: relative; width: 40px; height: 22px;
 }
 .toggle input { opacity: 0; width: 0; height: 0; }
 .toggle-slider {
   position: absolute; inset: 0;
-  border-radius: 10px;
+  border-radius: 11px;
   background: var(--hairline);
   cursor: pointer;
-  transition: background 0.2s;
+  transition: background 0.25s;
 }
 .toggle-slider::before {
   content: '';
   position: absolute;
-  left: 2px; top: 2px;
+  left: 3px; top: 3px;
   width: 16px; height: 16px;
   border-radius: 50%;
   background: #fff;
-  transition: transform 0.2s;
+  transition: transform 0.25s;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 }
 .toggle input:checked + .toggle-slider { background: var(--accent); }
 .toggle input:checked + .toggle-slider::before { transform: translateX(18px); }
 body.light .toggle-slider { background: var(--l-hairline); }
+body.light .toggle-slider::before { box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
 
 /* Step list */
 .step-list { display: flex; flex-direction: column; gap: 8px; }
@@ -753,15 +739,15 @@ body.light .toggle-slider { background: var(--l-hairline); }
   transition: all 0.25s;
   cursor: pointer;
 }
-.step-item:hover { transform: translateX(3px); border-color: var(--accent); }
+.step-item:hover { border-color: var(--accent); }
 body.light .step-item { background: var(--l-hairline2); border-color: var(--l-hairline); }
 body.light .step-item:hover { border-color: var(--l-accent); }
 .step-item.completed {
-  background: rgba(124,179,66,0.08);
+  background: rgba(124,179,66,0.06);
   border-color: var(--green);
 }
 body.light .step-item.completed {
-  background: rgba(22,163,74,0.06);
+  background: rgba(22,163,74,0.04);
   border-color: var(--l-green);
 }
 .step-n {
@@ -778,7 +764,6 @@ body.light .step-item.completed {
 }
 .step-item.completed .step-n {
   background: var(--green);
-  color: #000;
 }
 body.light .step-n { background: var(--l-accent); }
 .step-info {}
@@ -789,7 +774,7 @@ body.light .step-n { background: var(--l-accent); }
   color: var(--ink);
   transition: color 0.3s;
 }
-.step-item.completed .step-name { text-decoration: line-through; opacity: 0.7; }
+.step-item.completed .step-name { text-decoration: line-through; opacity: 0.6; }
 body.light .step-name { color: var(--l-ink); }
 .step-owner {
   font-family: var(--sans);
@@ -826,29 +811,6 @@ body.light .meta-label { color: var(--l-muted); }
 }
 body.light .meta-value { color: var(--l-ink); }
 
-/* Filter chips */
-.filter-row {
-  display: flex; gap: 6px; flex-wrap: wrap;
-  margin-bottom: 14px;
-}
-.filter-chip {
-  font-family: var(--mono);
-  font-size: 10px; padding: 4px 10px;
-  border-radius: 12px;
-  border: 1px solid var(--hairline);
-  background: transparent;
-  color: var(--muted);
-  cursor: pointer;
-  transition: all 0.2s;
-}
-.filter-chip:hover { border-color: var(--ink-60); color: var(--ink-60); }
-.filter-chip.active {
-  background: var(--accent); border-color: var(--accent);
-  color: #000; font-weight: 600;
-}
-body.light .filter-chip { border-color: var(--l-hairline); color: var(--l-muted); }
-body.light .filter-chip.active { background: var(--l-accent); border-color: var(--l-accent); color: #fff; }
-
 /* Note */
 .note-text {
   font-family: var(--sans);
@@ -867,7 +829,7 @@ body.light .note-text { color: var(--l-ink-60); background: var(--l-hairline2); 
   position: fixed; bottom: 40px; left: 50%; transform: translateX(-50%) translateY(20px);
   background: var(--surface); color: var(--ink);
   border: 1px solid var(--accent);
-  font-family: var(--sans); font-size: 13px;
+  font-family: var(--sans); font-size: 12px;
   padding: 10px 20px; border-radius: 8px;
   z-index: 100; opacity: 0;
   pointer-events: none;
@@ -910,7 +872,7 @@ body.light .sidebar::-webkit-scrollbar-thumb { background: var(--l-hairline); }
     <!-- Progress -->
     <div class="reveal progress-wrap">
       <div class="progress-header">
-        <span class="progress-label">项目总进度</span>
+        <span class="progress-label">总体进度</span>
         <span class="progress-pct" id="pct">0%</span>
       </div>
       <div class="progress-track">
@@ -922,22 +884,22 @@ body.light .sidebar::-webkit-scrollbar-thumb { background: var(--l-hairline); }
     <div class="stats-row reveal">
       <div class="stat-cell">
         <div class="stat-label">工程师</div>
-        <div class="stat-value"><span class="count" data-target="2">0</span><span class="stat-unit"> 人</span></div>
+        <div class="stat-value"><span class="count" data-target="2">2</span><span class="stat-unit"> 人</span></div>
         <div class="stat-sub">牛家红 · 王梦雅</div>
       </div>
       <div class="stat-cell">
         <div class="stat-label">模具总数</div>
-        <div class="stat-value accent"><span class="count" data-target="17">0</span><span class="stat-unit"> 套</span></div>
+        <div class="stat-value accent"><span class="count" data-target="17">17</span><span class="stat-unit"> 套</span></div>
         <div class="stat-sub">9 PEC18 + 8 PEC35</div>
       </div>
       <div class="stat-cell">
         <div class="stat-label">5月样品</div>
-        <div class="stat-value"><span class="count" data-target="301">0</span><span class="stat-unit"> 件</span></div>
+        <div class="stat-value"><span class="count" data-target="301">301</span><span class="stat-unit"> 件</span></div>
         <div class="stat-sub">动物试验 + 货架验证</div>
       </div>
       <div class="stat-cell">
         <div class="stat-label">6月样品</div>
-        <div class="stat-value"><span class="count" data-target="194">0</span><span class="stat-unit"> 件</span></div>
+        <div class="stat-value"><span class="count" data-target="194">194</span><span class="stat-unit"> 件</span></div>
         <div class="stat-sub">型检</div>
       </div>
     </div>
@@ -979,103 +941,23 @@ body.light .sidebar::-webkit-scrollbar-thumb { background: var(--l-hairline); }
           <tbody>
             <tr>
               <td>5月 · 动物试验</td>
-              <td class="may">10</td>
-              <td class="may">8</td>
-              <td class="may">12</td>
-              <td class="may">12</td>
-              <td class="may">4</td>
-              <td class="may">4</td>
-              <td class="may">2</td>
-              <td class="may">2</td>
-              <td>—</td>
-              <td class="may">5</td>
-              <td class="may">5</td>
-              <td class="may">3</td>
-              <td class="may">3</td>
-              <td class="may">3</td>
-              <td class="may">3</td>
-              <td>—</td>
-              <td>—</td>
+              <td class="may">10</td><td class="may">8</td><td class="may">12</td><td class="may">12</td><td class="may">4</td><td class="may">4</td><td class="may">2</td><td class="may">2</td><td>—</td><td class="may">5</td><td class="may">5</td><td class="may">3</td><td class="may">3</td><td class="may">3</td><td class="may">3</td><td>—</td><td>—</td>
             </tr>
             <tr>
               <td>5月 · 设计验证+货架</td>
-              <td class="may">21</td>
-              <td>—</td>
-              <td>—</td>
-              <td>—</td>
-              <td>—</td>
-              <td>—</td>
-              <td>—</td>
-              <td>—</td>
-              <td class="may">21</td>
-              <td class="may">16</td>
-              <td class="may">16</td>
-              <td>—</td>
-              <td>—</td>
-              <td>—</td>
-              <td>—</td>
-              <td class="may">16</td>
-              <td class="may">135</td>
+              <td class="may">21</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td class="may">21</td><td class="may">16</td><td class="may">16</td><td>—</td><td>—</td><td>—</td><td>—</td><td class="may">16</td><td class="may">135</td>
             </tr>
             <tr>
               <td>6月 · 型检</td>
-              <td class="jun">16</td>
-              <td>—</td>
-              <td>—</td>
-              <td>—</td>
-              <td>—</td>
-              <td>—</td>
-              <td>—</td>
-              <td>—</td>
-              <td class="jun">31</td>
-              <td class="jun">20</td>
-              <td class="jun">20</td>
-              <td>—</td>
-              <td>—</td>
-              <td>—</td>
-              <td>—</td>
-              <td class="jun">20</td>
-              <td class="jun">87</td>
+              <td class="jun">16</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td class="jun">31</td><td class="jun">20</td><td class="jun">20</td><td>—</td><td>—</td><td>—</td><td>—</td><td class="jun">20</td><td class="jun">87</td>
             </tr>
             <tr>
               <td>5月小计</td>
-              <td class="subtotal">31</td>
-              <td class="subtotal">8</td>
-              <td class="subtotal">12</td>
-              <td class="subtotal">12</td>
-              <td class="subtotal">4</td>
-              <td class="subtotal">4</td>
-              <td class="subtotal">2</td>
-              <td class="subtotal">2</td>
-              <td class="subtotal">21</td>
-              <td class="subtotal">21</td>
-              <td class="subtotal">21</td>
-              <td class="subtotal">3</td>
-              <td class="subtotal">3</td>
-              <td class="subtotal">3</td>
-              <td class="subtotal">3</td>
-              <td class="subtotal">16</td>
-              <td class="subtotal">135</td>
+              <td class="subtotal">31</td><td class="subtotal">8</td><td class="subtotal">12</td><td class="subtotal">12</td><td class="subtotal">4</td><td class="subtotal">4</td><td class="subtotal">2</td><td class="subtotal">2</td><td class="subtotal">21</td><td class="subtotal">21</td><td class="subtotal">21</td><td class="subtotal">3</td><td class="subtotal">3</td><td class="subtotal">3</td><td class="subtotal">3</td><td class="subtotal">16</td><td class="subtotal">135</td>
             </tr>
             <tr>
               <td>6月小计</td>
-              <td class="subtotal">16</td>
-              <td class="subtotal">—</td>
-              <td class="subtotal">—</td>
-              <td class="subtotal">—</td>
-              <td class="subtotal">—</td>
-              <td class="subtotal">—</td>
-              <td class="subtotal">—</td>
-              <td class="subtotal">—</td>
-              <td class="subtotal">31</td>
-              <td class="subtotal">20</td>
-              <td class="subtotal">20</td>
-              <td class="subtotal">—</td>
-              <td class="subtotal">—</td>
-              <td class="subtotal">—</td>
-              <td class="subtotal">—</td>
-              <td class="subtotal">20</td>
-              <td class="subtotal">87</td>
+              <td class="subtotal">16</td><td class="subtotal">—</td><td class="subtotal">—</td><td class="subtotal">—</td><td class="subtotal">—</td><td class="subtotal">—</td><td class="subtotal">—</td><td class="subtotal">—</td><td class="subtotal">31</td><td class="subtotal">20</td><td class="subtotal">20</td><td class="subtotal">—</td><td class="subtotal">—</td><td class="subtotal">—</td><td class="subtotal">—</td><td class="subtotal">20</td><td class="subtotal">87</td>
             </tr>
           </tbody>
         </table>
@@ -1089,7 +971,7 @@ body.light .sidebar::-webkit-scrollbar-thumb { background: var(--l-hairline); }
       </div>
       <div class="section-body" style="max-height:2000px">
         <div class="eng-grid">
-          <div class="eng-card" onclick="this.classList.toggle('expanded')">
+          <div class="eng-card">
             <div class="eng-header">
               <div class="eng-avatar">牛</div>
               <div class="eng-name">牛家红</div>
@@ -1106,9 +988,8 @@ body.light .sidebar::-webkit-scrollbar-thumb { background: var(--l-hairline); }
               <div class="eng-spec-row"><span class="eng-spec-code">SK-PEC18-0620-2D</span><span class="eng-spec-qty">× 2</span></div>
               <div class="eng-spec-row"><span class="eng-spec-code">SK-PEC18-3260-2D</span><span class="eng-spec-qty">× 52</span></div>
             </div>
-            <div class="eng-total-bar"><div class="eng-total-fill" data-pct="61"></div></div>
           </div>
-          <div class="eng-card" onclick="this.classList.toggle('expanded')">
+          <div class="eng-card">
             <div class="eng-header">
               <div class="eng-avatar">王</div>
               <div class="eng-name">王梦雅</div>
@@ -1124,7 +1005,6 @@ body.light .sidebar::-webkit-scrollbar-thumb { background: var(--l-hairline); }
               <div class="eng-spec-row"><span class="eng-spec-code">SK-PEC35-2560-3D</span><span class="eng-spec-qty">× 36</span></div>
               <div class="eng-spec-row"><span class="eng-spec-code">SK-PEC35-3260-2D</span><span class="eng-spec-qty">× 222</span></div>
             </div>
-            <div class="eng-total-bar"><div class="eng-total-fill" data-pct="39"></div></div>
           </div>
         </div>
       </div>
@@ -1145,10 +1025,7 @@ body.light .sidebar::-webkit-scrollbar-thumb { background: var(--l-hairline); }
               <div class="tl-day">DAY 01</div>
               <div class="tl-title"><span class="tl-check" onclick="toggleCheck(this, event)"></span>3D 建模 — 两人并行</div>
               <div class="tl-desc">牛家红 9 规格 + 王梦雅 8 规格模具三维模型同步完成</div>
-              <div class="tl-tags">
-                <span class="tl-tag niu">牛家红</span>
-                <span class="tl-tag wang">王梦雅</span>
-              </div>
+              <div class="tl-tags"><span class="tl-tag niu">牛家红</span><span class="tl-tag wang">王梦雅</span></div>
             </div>
           </div>
 
@@ -1159,10 +1036,7 @@ body.light .sidebar::-webkit-scrollbar-thumb { background: var(--l-hairline); }
               <div class="tl-day">DAY 02</div>
               <div class="tl-title"><span class="tl-check" onclick="toggleCheck(this, event)"></span>3D 模型审核 / 2D 图纸启动</div>
               <div class="tl-desc">3D 模型内部审核；两人各自启动 2D 工程图纸输出</div>
-              <div class="tl-tags">
-                <span class="tl-tag niu">牛家红</span>
-                <span class="tl-tag wang">王梦雅</span>
-              </div>
+              <div class="tl-tags"><span class="tl-tag niu">牛家红</span><span class="tl-tag wang">王梦雅</span></div>
             </div>
           </div>
 
@@ -1173,10 +1047,7 @@ body.light .sidebar::-webkit-scrollbar-thumb { background: var(--l-hairline); }
               <div class="tl-day">DAY 03</div>
               <div class="tl-title"><span class="tl-check" onclick="toggleCheck(this, event)"></span>2D 图纸完成</div>
               <div class="tl-desc">牛家红、王梦雅完成各自负责规格的 2D 工程图纸</div>
-              <div class="tl-tags">
-                <span class="tl-tag niu">牛家红</span>
-                <span class="tl-tag wang">王梦雅</span>
-              </div>
+              <div class="tl-tags"><span class="tl-tag niu">牛家红</span><span class="tl-tag wang">王梦雅</span></div>
             </div>
           </div>
 
@@ -1198,10 +1069,7 @@ body.light .sidebar::-webkit-scrollbar-thumb { background: var(--l-hairline); }
               <div class="tl-day">DAY 05</div>
               <div class="tl-title"><span class="tl-check" onclick="toggleCheck(this, event)"></span>研发总监签字 / 送委外加工</div>
               <div class="tl-desc">图纸送研发总监审批；同步送两家委外供应商，周期压缩至 2 天</div>
-              <div class="tl-tags">
-                <span class="tl-tag sign">研发总监签字</span>
-                <span class="tl-tag out">送委外</span>
-              </div>
+              <div class="tl-tags"><span class="tl-tag sign">研发总监签字</span><span class="tl-tag out">送委外</span></div>
             </div>
           </div>
 
@@ -1256,13 +1124,13 @@ body.light .sidebar::-webkit-scrollbar-thumb { background: var(--l-hairline); }
 
     <div class="divider"></div>
 
-    <!-- Theme -->
+    <!-- Theme Toggle -->
     <div>
-      <div class="side-label">主题</div>
+      <div class="side-label">外观</div>
       <div class="toggle-row">
         <div>
           <div class="toggle-lbl">深色模式</div>
-          <div class="toggle-lbl-sub">Dark Mode</div>
+          <div class="toggle-lbl-sub">切换暗色主题</div>
         </div>
         <label class="toggle">
           <input type="checkbox" id="themeToggle">
@@ -1357,7 +1225,7 @@ body.light .sidebar::-webkit-scrollbar-thumb { background: var(--l-hairline); }
   const c = document.getElementById('particleCanvas');
   const ctx = c.getContext('2d');
   let particles = [];
-  const count = 50;
+  const count = 35;
 
   function resize() {
     c.width = window.innerWidth;
@@ -1372,10 +1240,10 @@ body.light .sidebar::-webkit-scrollbar-thumb { background: var(--l-hairline); }
     particles.push({
       x: Math.random() * c.width,
       y: Math.random() * c.height,
-      r: Math.random() * 2 + 0.5,
-      vx: (Math.random() - 0.5) * 0.25,
-      vy: (Math.random() - 0.5) * 0.25,
-      opacity: Math.random() * 0.5 + 0.15,
+      r: Math.random() * 1.5 + 0.4,
+      vx: (Math.random() - 0.5) * 0.2,
+      vy: (Math.random() - 0.5) * 0.2,
+      opacity: Math.random() * 0.3 + 0.08,
     });
   }
 
@@ -1395,17 +1263,16 @@ body.light .sidebar::-webkit-scrollbar-thumb { background: var(--l-hairline); }
       ctx.fill();
     });
 
-    // Draw connections
     for (let i = 0; i < particles.length; i++) {
       for (let j = i + 1; j < particles.length; j++) {
         const dx = particles[i].x - particles[j].x;
         const dy = particles[i].y - particles[j].y;
         const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < 100) {
+        if (dist < 80) {
           ctx.beginPath();
           ctx.moveTo(particles[i].x, particles[i].y);
           ctx.lineTo(particles[j].x, particles[j].y);
-          ctx.strokeStyle = `rgba(${color},${0.04 * (1 - dist / 100)})`;
+          ctx.strokeStyle = `rgba(${color},${0.025 * (1 - dist / 80)})`;
           ctx.stroke();
         }
       }
@@ -1417,7 +1284,7 @@ body.light .sidebar::-webkit-scrollbar-thumb { background: var(--l-hairline); }
 
 // ============ Countdown ============
 function updateCountdown() {
-  const deadline = new Date(2026, 4, 31, 23, 59, 59); // May 31
+  const deadline = new Date(2026, 4, 31, 23, 59, 59);
   const now = new Date();
   let diff = deadline - now;
   if (diff <= 0) {
@@ -1433,7 +1300,7 @@ function updateCountdown() {
     `${days}<span class="unit">天</span> <span class="sep">:</span> ${String(hours).padStart(2,'0')}<span class="unit">时</span> <span class="sep">:</span> ${String(mins).padStart(2,'0')}<span class="unit">分</span>`;
 }
 updateCountdown();
-setInterval(updateCountdown, 30000);
+setInterval(updateCountdown, 60000);
 
 // ============ Scroll Reveal ============
 const revealEls = document.querySelectorAll('.reveal');
@@ -1441,41 +1308,30 @@ const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
       entry.target.classList.add('visible');
-      // Trigger count animation
-      const counters = entry.target.querySelectorAll('.count');
-      counters.forEach(c => animateCount(c));
-      // Trigger engineer bar animation
-      const bars = entry.target.querySelectorAll('.eng-total-fill');
-      bars.forEach(b => {
-        setTimeout(() => { b.style.width = b.dataset.pct + '%'; }, 300);
-      });
+      entry.target.querySelectorAll('.count').forEach(c => animateCount(c));
     }
   });
-}, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+}, { threshold: 0.12, rootMargin: '0px 0px -30px 0px' });
 revealEls.forEach(el => observer.observe(el));
 
-// Also observe stats-row and progress immediately if visible
-const statsRow = document.querySelector('.stats-row');
-if (statsRow) observer.observe(statsRow);
-const progWrap = document.querySelector('.progress-wrap');
-if (progWrap) observer.observe(progWrap);
+// Also observe stats and progress immediately
+['.stats-row', '.progress-wrap'].forEach(sel => {
+  const el = document.querySelector(sel);
+  if (el) observer.observe(el);
+});
 
 function animateCount(el) {
   const target = parseInt(el.dataset.target);
   if (el.dataset.counted) return;
   el.dataset.counted = '1';
-  const duration = 1500;
+  const duration = 1400;
   const start = performance.now();
   function step(ts) {
     const progress = Math.min((ts - start) / duration, 1);
     const eased = 1 - Math.pow(1 - progress, 3);
     el.textContent = Math.floor(eased * target);
-    if (progress < 1) {
-      requestAnimationFrame(step);
-    } else {
-      el.textContent = target;
-      el.classList.add('counted');
-    }
+    if (progress < 1) { requestAnimationFrame(step); }
+    else { el.textContent = target; }
   }
   requestAnimationFrame(step);
 }
@@ -1489,6 +1345,8 @@ function updateProgress() {
   document.getElementById('progFill').style.width = pct + '%';
   if (pct >= 100) {
     document.getElementById('statusMsg').textContent = '全部完成 ✓';
+  } else {
+    document.getElementById('statusMsg').textContent = '5/25 — 5/31 进行中';
   }
 }
 
@@ -1509,7 +1367,7 @@ function toggleTimeline(dot) {
     row.classList.remove('completed');
   }
   updateProgress();
-  showToast(dot.classList.contains('done') ? '✓ 已完成' : '↩ 已取消');
+  showToast(dot.classList.contains('done') ? '✓ 标记完成' : '↩ 取消完成');
 }
 
 function toggleCheck(check, e) {
@@ -1528,11 +1386,11 @@ function toggleCheck(check, e) {
     row.classList.remove('completed');
   }
   updateProgress();
-  showToast(check.classList.contains('checked') ? '✓ 已完成' : '↩ 已取消');
+  showToast(check.classList.contains('checked') ? '✓ 标记完成' : '↩ 取消完成');
 }
 
 // ============ Step Toggle ============
-let completedSteps = JSON.parse(localStorage.getItem('moldSteps') || '[]');
+let completedSteps = JSON.parse(localStorage.getItem('moldStepsV2') || '[]');
 function restoreSteps() {
   document.querySelectorAll('.step-item').forEach((item, i) => {
     if (completedSteps.includes(i)) item.classList.add('completed');
@@ -1548,9 +1406,9 @@ function toggleStep(item, idx) {
   } else {
     completedSteps = completedSteps.filter(i => i !== idx);
   }
-  localStorage.setItem('moldSteps', JSON.stringify(completedSteps));
+  localStorage.setItem('moldStepsV2', JSON.stringify(completedSteps));
   updateProgress();
-  showToast(item.classList.contains('completed') ? '✓ ' + item.querySelector('.step-name').textContent + ' 完成' : '↩ 已取消');
+  showToast(item.classList.contains('completed') ? '✓ ' + item.querySelector('.step-name').textContent + ' 完成' : '↩ 取消');
 }
 
 // ============ Section Collapse ============
@@ -1571,21 +1429,16 @@ function toggleSection(title) {
 function filterTable(type, chip) {
   document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
   chip.classList.add('active');
-  const rows = document.querySelectorAll('#demandTable tbody tr');
-  rows.forEach(row => {
+  document.querySelectorAll('#demandTable tbody tr').forEach(row => {
     if (type === 'all') {
       row.style.display = '';
       row.classList.remove('highlight-row');
       return;
     }
-    const hasType = row.querySelector('.' + type);
-    if (hasType) {
-      row.style.display = '';
-    } else {
-      row.style.display = 'none';
-    }
+    row.style.display = row.querySelector('.' + type) ? '' : 'none';
   });
-  showToast(type === 'all' ? '显示全部' : (type === 'may' ? '筛选：5月需求' : '筛选：6月需求'));
+  const labels = { all: '显示全部', may: '筛选：5月需求', jun: '筛选：6月需求' };
+  showToast(labels[type]);
 }
 
 // Table row click highlight
@@ -1606,36 +1459,41 @@ function showToast(msg) {
 }
 
 // ============ Theme Toggle ============
-const toggle = document.getElementById('themeToggle');
-toggle.addEventListener('change', () => {
-  document.body.classList.toggle('light', !toggle.checked);
-  localStorage.setItem('moldTheme', toggle.checked ? 'dark' : 'light');
-});
+const themeToggle = document.getElementById('themeToggle');
 
-// Restore theme
-const savedTheme = localStorage.getItem('moldTheme');
+// Restore saved theme
+const savedTheme = localStorage.getItem('moldPlanTheme');
 if (savedTheme === 'dark') {
-  toggle.checked = true;
+  themeToggle.checked = true;
   document.body.classList.remove('light');
+} else {
+  themeToggle.checked = false;
+  document.body.classList.add('light');
 }
 
-// ============ Initial Progress ============
+themeToggle.addEventListener('change', () => {
+  if (themeToggle.checked) {
+    document.body.classList.remove('light');
+    localStorage.setItem('moldPlanTheme', 'dark');
+  } else {
+    document.body.classList.add('light');
+    localStorage.setItem('moldPlanTheme', 'light');
+  }
+});
+
+// ============ Init ============
 updateProgress();
 
 // Trigger stat count if already visible
 setTimeout(() => {
   document.querySelectorAll('.count').forEach(c => {
     const rect = c.getBoundingClientRect();
-    if (rect.top < window.innerHeight) animateCount(c);
-  });
-  document.querySelectorAll('.eng-total-fill').forEach(b => {
-    const rect = b.getBoundingClientRect();
-    if (rect.top < window.innerHeight) b.style.width = b.dataset.pct + '%';
+    if (rect.top < window.innerHeight && rect.bottom > 0) animateCount(c);
   });
   const progFill = document.getElementById('progFill');
   const pct = document.getElementById('pct').textContent.replace('%','');
-  if (progFill) progFill.style.width = pct + '%';
-}, 400);
+  if (progFill && parseInt(pct) > 0) progFill.style.width = pct + '%';
+}, 300);
 </script>
 
 </body>
